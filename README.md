@@ -14,7 +14,7 @@ For this first commit only the sensors with simple digital output are covered.
 
 ## <a name="16_sensor"></a> 16 sensors covered
 
-1. ~~DHT11 temperature and humidity sensor module~~
+1. DHT11 temperature and humidity sensor module
 2. HC-SR501 infrared human body induction module
 3. ~~DS1302 real time clock module~~
 4. Rain sensor module
@@ -33,7 +33,8 @@ For this first commit only the sensors with simple digital output are covered.
 
 ## <a name="basic_notions"></a> Basic notions
 
-###GPIO
+### GPIO
+
 **G**eneral **P**urpose **I**nput **O**utput 
 
 ### BCM or BOARD  
@@ -75,6 +76,30 @@ GPIO.remove_event_detect(channel)
 GPIO.cleanup()
 ~~~
 
+### Adafruit library
+First it’s necessary to have the `build-essential` and `python-dev` packages installed:
+
+~~~~
+sudo apt-get update
+sudo apt-get install build-essential python-dev
+~~~~
+
+Second, we can clone the Adafruit library from the library repository:
+
+~~~~
+git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+cd Adafruit_Python_DHT
+~~~~
+
+And finally install the library in our system for python 2 and 3:
+
+~~~~
+sudo python setup.py install
+sudo python3 setup.py install
+~~~~
+
+At this point the library will be installed and ready to be used.
+
 ## <a name="the_table"></a> Sensors table
 
 | # | Sensor | Voltage | Extra | Analog Port | Digital Output |
@@ -110,7 +135,12 @@ GPIO.cleanup()
 ![Sensor 1](images/sensor01.jpg)
 
 ##### How it works
+There are 2 DHT11, one with 3 pins and the other with 4 pins, the last one will require a resistor (10K) to be place between the pin 1 (3.3V) and the pin 2 (Data). 
+The three pin DHT11 has already the resistor.
 
+This sensor requires a specific protocol to be applied to the data pin, we can easily achieve that with the Adafruit DHT library.
+
+It will return the temperature and humidity in ºC and %.
 
 ### Sensor 2 - Infrared module
 
